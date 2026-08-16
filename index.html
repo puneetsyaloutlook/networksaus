@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Networks Australia</title>
 <style>
   * { box-sizing: border-box; }
@@ -9,42 +10,12 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     color: #000;
-    background: #fff;
+    background: #cfcfcf;
     margin: 0;
     padding: 0;
   }
 
-  .controls-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px dashed #999;
-    padding: 8px 16px;
-    background: #fafafa;
-  }
-  .controls-bar .cb-label {
-    font-size: 10px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    color: #777;
-  }
-  .controls-bar .row { display: flex; gap: 4px; }
-  .controls-bar button {
-    font-family: inherit;
-    font-size: 11px;
-    padding: 4px 9px;
-    border: 1px solid #999;
-    background: #fff;
-    color: #555;
-    cursor: pointer;
-  }
-  .controls-bar button[aria-pressed="true"] {
-    background: #555;
-    color: #fff;
-    border-color: #555;
-  }
-
-  .site { display: none; padding: 24px; max-width: 980px; margin: 0 auto; }
+  .site { display: none; padding: 24px; max-width: 980px; margin: 0 auto; background: #ececec; }
   .site.active { display: block; }
 
   .nav {
@@ -60,17 +31,17 @@
   .nav .links span {
     font-size: 12px; font-weight: bold; letter-spacing: 0.6px; text-transform: uppercase;
   }
-  .nav .links span.link { cursor: pointer; }
+  .nav .links span.link { cursor: pointer; color: #1a54c4; }
   .nav .links span.link:hover { text-decoration: underline; }
-  .nav .links span.current { text-decoration: underline; text-decoration-thickness: 2px; }
+  .nav .links span.current { text-decoration: underline; text-decoration-thickness: 2px; color: #1a54c4; }
 
-  .hero { border: 2px solid #000; padding: 32px 24px; margin-bottom: 24px; }
+  .hero { border: 2px solid #000; padding: 32px 24px; margin-bottom: 24px; background: #fff; }
   .hero.center { text-align: center; }
   .hero .h { font-size: 23px; font-weight: bold; margin-bottom: 10px; line-height: 1.3; }
   .hero .sub { font-size: 14px; line-height: 1.6; color: #333; max-width: 640px; }
   .hero.center .sub { margin: 0 auto; }
 
-  .block { border: 1px solid #000; padding: 16px; margin-bottom: 20px; }
+  .block { border: 1px solid #000; padding: 16px; margin-bottom: 20px; background: #fff; }
   .label-row {
     display: flex; justify-content: space-between; align-items: center;
     border-bottom: 1px solid #000; padding-bottom: 6px; margin-bottom: 14px;
@@ -80,20 +51,20 @@
   .row.grid { display: flex; gap: 12px; flex-wrap: wrap; }
   .row.grid + .row.grid { margin-top: 12px; }
   .col { flex: 1; min-width: 150px; }
-  .card { border: 1px solid #000; padding: 10px; }
+  .card { border: 1px solid #000; padding: 10px; background: #fff; }
   .card.clickable { cursor: pointer; }
   .featured-exhibition.clickable { cursor: pointer; }
   .featured-exhibition.clickable:hover { border-width: 3px; }
   .card.clickable:hover { border-width: 2px; }
   .card .title { font-size: 14px; font-weight: bold; margin: 8px 0 4px; }
   .card .meta { font-size: 11px; color: #555; margin-bottom: 6px; }
-  .card .view-link {
+  .view-link {
     font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.4px;
-    margin-top: 8px; text-decoration: underline;
+    margin-top: 8px; text-decoration: underline; color: #1a54c4;
   }
-  .list-row { border: 1px solid #000; padding: 9px 10px; margin-bottom: 6px; font-size: 13px; }
+  .list-row { border: 1px solid #000; padding: 9px 10px; margin-bottom: 6px; font-size: 13px; background: #fff; }
   .list-row .row-artists { margin-top: 4px; }
-  .list-row.clickable { cursor: pointer; }
+  .list-row.clickable { cursor: pointer; color: #1a54c4; }
 
   .img-placeholder {
     background:
@@ -124,7 +95,7 @@
   .main { flex: 1; min-width: 0; }
 
   .tag { display: inline-block; border: 1px dashed #000; padding: 2px 8px; margin: 2px 4px 2px 0; font-size: 10px; letter-spacing: 0.3px; text-transform: uppercase; }
-  .tag.clickable { cursor: pointer; }
+  .tag.clickable { cursor: pointer; color: #1a54c4; }
   .tag.clickable:hover { border-style: solid; }
   .sidebar .tag { display: block; width: fit-content; }
 
@@ -132,7 +103,7 @@
   .field-label { font-size: 10px; font-weight: bold; letter-spacing: 0.8px; text-transform: uppercase; margin: 12px 0 6px; }
 
   /* the current exhibition is the landing page's main event */
-  .featured-exhibition { border: 2px solid #000; padding: 28px; margin-bottom: 24px; }
+  .featured-exhibition { border: 2px solid #000; padding: 28px; margin-bottom: 24px; background: #fff; }
   .featured-exhibition .eyebrow { font-size: 11px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
   .featured-exhibition .wide-card-photo { flex: 0 0 320px; }
   .featured-exhibition .img-placeholder { height: 260px; }
@@ -152,396 +123,43 @@
   .field-input { border: 1px solid #000; height: 34px; }
   .field-textarea { border: 1px solid #000; height: 90px; }
   .send-btn { display: inline-block; border: 1px solid #000; padding: 8px 18px; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 720px) {
+    .site { padding: 16px; }
+    .nav { flex-wrap: wrap; row-gap: 10px; }
+    .nav .links { flex-wrap: wrap; gap: 12px 16px; }
+    .cards-2col { grid-template-columns: 1fr; }
+    .wide-card { flex-direction: column; }
+    .wide-card .wide-card-photo,
+    .featured-exhibition .wide-card-photo,
+    .exhibition-card .wide-card-photo { flex-basis: auto; }
+    .featured-exhibition .img-placeholder { height: 200px; }
+    .layout { flex-direction: column; }
+    .layout > div[style*="flex:0 0 210px"],
+    .layout > div[style*="flex:0 0 160px"] { flex-basis: auto; }
+  }
+
+  @media (max-width: 560px) {
+    .hero { padding: 22px 16px; }
+    .hero .h { font-size: 19px; }
+    .featured-exhibition { padding: 18px; }
+    .featured-exhibition .title { font-size: 21px; }
+    .row.grid { flex-direction: column; }
+    .col { min-width: 0; }
+  }
 </style>
 </head>
 <body>
 
-<div class="controls-bar">
-  <span class="cb-label">Prototype switch, choose which concept to view</span>
-  <div class="row">
-    <button id="btn-concept-a" aria-pressed="true" onclick="showConcept('a')">Concept A: hierarchical pathway</button>
-    <button id="btn-concept-b" aria-pressed="false" onclick="showConcept('b')">Concept B: flat network</button>
-  </div>
-</div>
-
-<!-- ===================== CONCEPT A: HOME ===================== -->
-<div class="site active" id="a-home">
-  <div class="nav">
-    <div class="logo" onclick="showPage('a','home')">Networks Australia</div>
-    <div class="links">
-      <span class="link" onclick="showPage('a','about')">About</span>
-      <span class="link" onclick="showPage('a','artists')">Artists</span>
-      <span class="link" onclick="showPage('a','exhibitions')">Exhibitions</span>
-      <span class="link" onclick="showPage('a','contact')">Contact</span>
-    </div>
-  </div>
-  <div class="hero">
-    <div class="h">Independent studios, shared exhibitions</div>
-    <div class="sub">More than 30 practising artists across textiles, sculpture, photography and painting have been exhibiting together for over a decade. Each member works from their own studio, in their own medium, and the group comes together regularly to critique, problem-solve and build shows collaboratively, rather than under one house style.</div>
-  </div>
-  <div class="block">
-    <div class="label-row">
-      <div class="label">Featured artists</div>
-      <div class="view-link" style="cursor:pointer;" onclick="showPage('a','artists')">See all artists</div>
-    </div>
-    <div class="cards-2col">
-      <div class="card wide-card clickable" onclick="showPage('a','profile')">
-        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>photo</span></div></div>
-        <div class="wide-card-body">
-          <div class="title">Susan Hey</div>
-          <span class="tag">textiles</span>
-          <div class="text-line w-100" style="margin-top:10px;"></div>
-          <div class="text-line w-60"></div>
-          <div class="view-link">View profile</div>
-        </div>
-      </div>
-      <div class="card wide-card clickable" onclick="showPage('a','profile')">
-        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>photo</span></div></div>
-        <div class="wide-card-body">
-          <div class="title">Pinal Maniar</div>
-          <span class="tag">natural dye</span>
-          <div class="text-line w-100" style="margin-top:10px;"></div>
-          <div class="text-line w-60"></div>
-          <div class="view-link">View profile</div>
-        </div>
-      </div>
-      <div class="card wide-card clickable" onclick="showPage('a','profile')">
-        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>photo</span></div></div>
-        <div class="wide-card-body">
-          <div class="title">Fiona Bowring</div>
-          <span class="tag">photography</span>
-          <div class="text-line w-100" style="margin-top:10px;"></div>
-          <div class="text-line w-60"></div>
-          <div class="view-link">View profile</div>
-        </div>
-      </div>
-      <div class="card wide-card clickable" onclick="showPage('a','profile')">
-        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>photo</span></div></div>
-        <div class="wide-card-body">
-          <div class="title">Valerie Kirk</div>
-          <span class="tag">tapestry</span>
-          <div class="text-line w-100" style="margin-top:10px;"></div>
-          <div class="text-line w-60"></div>
-          <div class="view-link">View profile</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="block">
-    <div class="label-row">
-      <div class="label">Upcoming exhibitions</div>
-      <div class="view-link" style="cursor:pointer;" onclick="showPage('a','exhibitions')">View all exhibitions</div>
-    </div>
-    <div class="cards-1col">
-      <div class="card exhibition-card wide-card clickable" onclick="showPage('a','exhibitions')">
-        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>image</span></div></div>
-        <div class="wide-card-body">
-          <div class="title">Vulnerable</div>
-          <div class="meta">Tyger Gallery, opens 22 November</div>
-          <div class="text-line w-100" style="margin-top:10px;"></div>
-          <div class="text-line w-80"></div>
-        </div>
-      </div>
-      <div class="card exhibition-card wide-card clickable" onclick="showPage('a','exhibitions')">
-        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>image</span></div></div>
-        <div class="wide-card-body">
-          <div class="title">2 Decades</div>
-          <div class="meta">Tyger Gallery, dates TBC</div>
-          <div class="text-line w-100" style="margin-top:10px;"></div>
-          <div class="text-line w-80"></div>
-        </div>
-      </div>
-      <div class="card exhibition-card wide-card clickable" onclick="showPage('a','exhibitions')">
-        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>image</span></div></div>
-        <div class="wide-card-body">
-          <div class="title">Friction</div>
-          <div class="meta">Canberra Environment Centre, dates TBC</div>
-          <div class="text-line w-100" style="margin-top:10px;"></div>
-          <div class="text-line w-80"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="footer">Contact details, social links, acknowledgement of country</div>
-</div>
-
-<!-- ===================== CONCEPT A: ARTISTS INDEX ===================== -->
-<div class="site" id="a-artists">
-  <div class="nav">
-    <div class="logo" onclick="showPage('a','home')">Networks Australia</div>
-    <div class="links">
-      <span class="link" onclick="showPage('a','about')">About</span>
-      <span class="link current" onclick="showPage('a','artists')">Artists</span>
-      <span class="link" onclick="showPage('a','exhibitions')">Exhibitions</span>
-      <span class="link" onclick="showPage('a','contact')">Contact</span>
-    </div>
-  </div>
-  <div class="block">
-    <div class="label-row"><div class="label">All artists, 9</div></div>
-    <div class="cards-2col">
-      <div class="card wide-card clickable" onclick="showPage('a','profile')">
-        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>photo</span></div></div>
-        <div class="wide-card-body"><div class="title">Susan Hey</div><span class="tag">textiles</span></div>
-      </div>
-      <div class="card wide-card clickable" onclick="showPage('a','profile')">
-        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>photo</span></div></div>
-        <div class="wide-card-body"><div class="title">Pinal Maniar</div><span class="tag">natural dye</span></div>
-      </div>
-      <div class="card wide-card clickable" onclick="showPage('a','profile')">
-        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>photo</span></div></div>
-        <div class="wide-card-body"><div class="title">Fiona Bowring</div><span class="tag">photography</span></div>
-      </div>
-      <div class="card wide-card clickable" onclick="showPage('a','profile')">
-        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>photo</span></div></div>
-        <div class="wide-card-body"><div class="title">Valerie Kirk</div><span class="tag">tapestry</span></div>
-      </div>
-      <div class="card wide-card clickable" onclick="showPage('a','profile')">
-        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>photo</span></div></div>
-        <div class="wide-card-body"><div class="title">Nancy Tingey</div><span class="tag">textiles</span></div>
-      </div>
-      <div class="card wide-card clickable" onclick="showPage('a','profile')">
-        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>photo</span></div></div>
-        <div class="wide-card-body"><div class="title">Rozalie Sherwood</div><span class="tag">sculpture</span></div>
-      </div>
-      <div class="card wide-card clickable" onclick="showPage('a','profile')">
-        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>photo</span></div></div>
-        <div class="wide-card-body"><div class="title">Josie Cosgrove</div><span class="tag">photography</span></div>
-      </div>
-      <div class="card wide-card clickable" onclick="showPage('a','profile')">
-        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>photo</span></div></div>
-        <div class="wide-card-body"><div class="title">Karyn Fearnside</div><span class="tag">textiles</span></div>
-      </div>
-      <div class="card wide-card clickable" onclick="showPage('a','profile')">
-        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>photo</span></div></div>
-        <div class="wide-card-body"><div class="title">Bev Moxon</div><span class="tag">textiles</span></div>
-      </div>
-    </div>
-  </div>
-  <div class="footer">Contact details, social links, acknowledgement of country</div>
-</div>
-
-<!-- ===================== CONCEPT A: ARTIST PROFILE ===================== -->
-<div class="site" id="a-profile">
-  <div class="nav">
-    <div class="logo" onclick="showPage('a','home')">Networks Australia</div>
-    <div class="links">
-      <span class="link" onclick="showPage('a','about')">About</span>
-      <span class="link" onclick="showPage('a','artists')">Artists</span>
-      <span class="link" onclick="showPage('a','exhibitions')">Exhibitions</span>
-      <span class="link" onclick="showPage('a','contact')">Contact</span>
-    </div>
-  </div>
-  <div class="layout" style="margin-bottom:20px;">
-    <div style="flex:0 0 210px;">
-      <div class="img-placeholder img-lg"><span>artist photo</span></div>
-    </div>
-    <div class="main">
-      <div class="block">
-        <div class="artist-name">Susan Hey</div>
-        <div><span class="tag">textiles</span><span class="tag">stitch</span></div>
-        <div class="field-label">Bio</div>
-        <div class="text-line w-100"></div>
-        <div class="text-line w-92"></div>
-        <div class="text-line w-80"></div>
-        <div class="text-line w-40"></div>
-      </div>
-    </div>
-  </div>
-  <div class="block">
-    <div class="label-row"><div class="label">Works</div></div>
-    <div class="row grid">
-      <div class="col"><div class="img-placeholder img-md"><span>work image</span></div></div>
-      <div class="col"><div class="img-placeholder img-md"><span>work image</span></div></div>
-      <div class="col"><div class="img-placeholder img-md"><span>work image</span></div></div>
-    </div>
-  </div>
-  <div class="block">
-    <div class="label-row"><div class="label">Exhibition history</div></div>
-    <div class="list-row clickable" onclick="showPage('a','exhibitions')">Peace, Joy and Stillness - Rusten House, 2023</div>
-    <div class="list-row clickable" onclick="showPage('a','exhibitions')">Meander - Tuggeranong Arts Centre, 2023</div>
-    <div class="list-row clickable" onclick="showPage('a','exhibitions')">Creating Apart, Together - M16 Artspace, 2024</div>
-  </div>
-  <div class="footer">Contact details, social links, acknowledgement of country</div>
-</div>
-
-<!-- ===================== CONCEPT A: EXHIBITIONS ===================== -->
-<div class="site" id="a-exhibitions">
-  <div class="nav">
-    <div class="logo" onclick="showPage('a','home')">Networks Australia</div>
-    <div class="links">
-      <span class="link" onclick="showPage('a','about')">About</span>
-      <span class="link" onclick="showPage('a','artists')">Artists</span>
-      <span class="link current" onclick="showPage('a','exhibitions')">Exhibitions</span>
-      <span class="link" onclick="showPage('a','contact')">Contact</span>
-    </div>
-  </div>
-  <div class="block">
-    <div class="label-row"><div class="label">Upcoming</div></div>
-    <div class="cards-1col">
-      <div class="card exhibition-card wide-card">
-        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>image</span></div></div>
-        <div class="wide-card-body">
-          <div class="title">Vulnerable</div>
-          <div class="meta">Tyger Gallery, opens 22 November</div>
-          <div class="text-line w-100" style="margin-top:10px;"></div>
-          <div class="text-line w-60"></div>
-          <div class="field-label" style="margin-top:10px;">Exhibiting artists</div>
-          <span class="tag clickable" onclick="showPage('a','profile')">Rozalie Sherwood</span>
-          <span class="tag clickable" onclick="showPage('a','profile')">Pinal Maniar</span>
-          <span class="tag clickable" onclick="showPage('a','profile')">Steve Tomlin</span>
-        </div>
-      </div>
-      <div class="card exhibition-card wide-card">
-        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>image</span></div></div>
-        <div class="wide-card-body">
-          <div class="title">2 Decades</div>
-          <div class="meta">Tyger Gallery, dates TBC</div>
-          <div class="text-line w-100" style="margin-top:10px;"></div>
-          <div class="text-line w-60"></div>
-          <div class="field-label" style="margin-top:10px;">Exhibiting artists</div>
-          <span class="tag clickable" onclick="showPage('a','profile')">Josie Cosgrove</span>
-          <span class="tag clickable" onclick="showPage('a','profile')">Karyn Fearnside</span>
-        </div>
-      </div>
-      <div class="card exhibition-card wide-card">
-        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>image</span></div></div>
-        <div class="wide-card-body">
-          <div class="title">Friction</div>
-          <div class="meta">Canberra Environment Centre, dates TBC</div>
-          <div class="text-line w-100" style="margin-top:10px;"></div>
-          <div class="text-line w-60"></div>
-          <div class="field-label" style="margin-top:10px;">Exhibiting artists</div>
-          <span class="tag clickable" onclick="showPage('a','profile')">Pinal Maniar</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="block">
-    <div class="label-row"><div class="label">Past archive, filter by year</div></div>
-    <div class="list-row">
-      2024 - Creating Apart, Together - M16 Artspace
-      <div class="row-artists">
-        <span class="tag clickable" onclick="showPage('a','profile')">Gay Hodder</span>
-        <span class="tag clickable" onclick="showPage('a','profile')">Fiona Bowring</span>
-        <span class="tag clickable" onclick="showPage('a','profile')">Susan Hey</span>
-      </div>
-    </div>
-    <div class="list-row">
-      2023 - Textured Earth - Tuggeranong Arts Centre
-      <div class="row-artists">
-        <span class="tag clickable" onclick="showPage('a','profile')">Josie Cosgrove</span>
-        <span class="tag clickable" onclick="showPage('a','profile')">Rozalie Sherwood</span>
-        <span class="tag clickable" onclick="showPage('a','profile')">Christine Appleby</span>
-      </div>
-    </div>
-    <div class="list-row">
-      2023 - Artists at work - ANCA Gallery
-      <div class="row-artists">
-        <span class="tag clickable" onclick="showPage('a','profile')">Nancy Tingey</span>
-        <span class="tag clickable" onclick="showPage('a','profile')">Valerie Kirk</span>
-      </div>
-    </div>
-    <div class="list-row">
-      2023 - Peace, Joy and Stillness - Rusten House
-      <div class="row-artists">
-        <span class="tag clickable" onclick="showPage('a','profile')">Susan Hey</span>
-      </div>
-    </div>
-    <div class="list-row">
-      2023 - PIN Show - ANCA Gallery
-      <div class="row-artists">
-        <span class="tag clickable" onclick="showPage('a','profile')">Pinal Maniar</span>
-        <span class="tag clickable" onclick="showPage('a','profile')">Sandra Obst</span>
-      </div>
-    </div>
-  </div>
-  <div class="footer">Contact details, social links, acknowledgement of country</div>
-</div>
-
-<!-- ===================== CONCEPT A: ABOUT ===================== -->
-<div class="site" id="a-about">
-  <div class="nav">
-    <div class="logo" onclick="showPage('a','home')">Networks Australia</div>
-    <div class="links">
-      <span class="link current" onclick="showPage('a','about')">About</span>
-      <span class="link" onclick="showPage('a','artists')">Artists</span>
-      <span class="link" onclick="showPage('a','exhibitions')">Exhibitions</span>
-      <span class="link" onclick="showPage('a','contact')">Contact</span>
-    </div>
-  </div>
-  <div class="hero center">
-    <div class="h">About Networks Australia</div>
-    <div class="sub">Placeholder page, structure only</div>
-  </div>
-  <div class="block">
-    <div class="label-row"><div class="label">Our story</div></div>
-    <div class="text-line w-100"></div>
-    <div class="text-line w-92"></div>
-    <div class="text-line w-80"></div>
-    <div class="text-line w-60"></div>
-  </div>
-  <div class="block">
-    <div class="label-row"><div class="label">How it started</div></div>
-    <div class="layout">
-      <div style="flex:0 0 160px;">
-        <div class="img-placeholder img-md"><span>photo</span></div>
-      </div>
-      <div class="main">
-        <div class="text-line w-100"></div>
-        <div class="text-line w-92"></div>
-        <div class="text-line w-80"></div>
-        <div>
-          Founding member
-          <span class="tag clickable" onclick="showPage('a','profile')">Nancy Tingey</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="block">
-    <div class="label-row"><div class="label">How we work</div></div>
-    <div class="text-line w-100"></div>
-    <div class="text-line w-92"></div>
-    <div class="text-line w-40"></div>
-  </div>
-  <div class="footer">Contact details, social links, acknowledgement of country</div>
-</div>
-
-<!-- ===================== CONCEPT A: CONTACT ===================== -->
-<div class="site" id="a-contact">
-  <div class="nav">
-    <div class="logo" onclick="showPage('a','home')">Networks Australia</div>
-    <div class="links">
-      <span class="link" onclick="showPage('a','about')">About</span>
-      <span class="link" onclick="showPage('a','artists')">Artists</span>
-      <span class="link" onclick="showPage('a','exhibitions')">Exhibitions</span>
-      <span class="link current" onclick="showPage('a','contact')">Contact</span>
-    </div>
-  </div>
-  <div class="hero center">
-    <div class="h">Get in touch</div>
-    <div class="sub">Placeholder page, structure only</div>
-  </div>
-  <div class="block">
-    <div class="field"><div class="field-label">Name</div><div class="field-input"></div></div>
-    <div class="field"><div class="field-label">Email</div><div class="field-input"></div></div>
-    <div class="field"><div class="field-label">Message</div><div class="field-textarea"></div></div>
-    <div class="send-btn">Send</div>
-  </div>
-  <div class="block">
-    <div class="label-row"><div class="label">Visit</div></div>
-    <div class="text-line w-80"></div>
-    <div class="text-line w-60"></div>
-  </div>
-  <div class="footer">Contact details, social links, acknowledgement of country</div>
-</div>
-
 <!-- ===================== CONCEPT B: HOME ===================== -->
-<div class="site" id="b-explore">
+<div class="site active" id="b-explore">
   <div class="nav">
     <div class="logo" onclick="showPage('b','explore')">Networks Australia</div>
     <div class="links">
       <span class="link current" onclick="showPage('b','explore')">Home</span>
       <span class="link" onclick="showPage('b','about')">About</span>
+      <span class="link" onclick="showPage('b','members')">Artists</span>
       <span class="link" onclick="showPage('b','exhibitions')">Exhibitions</span>
       <span class="link" onclick="showPage('b','contact')">Contact</span>
     </div>
@@ -551,7 +169,7 @@
     <div class="wide-card">
       <div class="wide-card-photo"><div class="img-placeholder"><span>image</span></div></div>
       <div class="wide-card-body">
-        <div class="title">Vulnerable</div>
+        <div class="title">The Odyssey</div>
         <div class="meta">Tyger Gallery, opens 22 November</div>
         <div class="text-line w-100" style="margin-top:12px;"></div>
         <div class="text-line w-80"></div>
@@ -590,6 +208,7 @@
     <div class="links">
       <span class="link" onclick="showPage('b','explore')">Home</span>
       <span class="link" onclick="showPage('b','about')">About</span>
+      <span class="link" onclick="showPage('b','members')">Artists</span>
       <span class="link current" onclick="showPage('b','exhibitions')">Exhibitions</span>
       <span class="link" onclick="showPage('b','contact')">Contact</span>
     </div>
@@ -670,6 +289,7 @@
     <div class="links">
       <span class="link" onclick="showPage('b','explore')">Home</span>
       <span class="link" onclick="showPage('b','about')">About</span>
+      <span class="link" onclick="showPage('b','members')">Artists</span>
       <span class="link" onclick="showPage('b','exhibitions')">Exhibitions</span>
       <span class="link" onclick="showPage('b','contact')">Contact</span>
     </div>
@@ -703,6 +323,7 @@
     <div class="links">
       <span class="link" onclick="showPage('b','explore')">Home</span>
       <span class="link current" onclick="showPage('b','about')">About</span>
+      <span class="link" onclick="showPage('b','members')">Artists</span>
       <span class="link" onclick="showPage('b','exhibitions')">Exhibitions</span>
       <span class="link" onclick="showPage('b','contact')">Contact</span>
     </div>
@@ -744,6 +365,62 @@
   <div class="footer">Contact details, social links, acknowledgement of country</div>
 </div>
 
+<!-- ===================== CONCEPT B: ARTISTS INDEX ===================== -->
+<div class="site" id="b-members">
+  <div class="nav">
+    <div class="logo" onclick="showPage('b','explore')">Networks Australia</div>
+    <div class="links">
+      <span class="link" onclick="showPage('b','explore')">Home</span>
+      <span class="link" onclick="showPage('b','about')">About</span>
+      <span class="link current" onclick="showPage('b','members')">Artists</span>
+      <span class="link" onclick="showPage('b','exhibitions')">Exhibitions</span>
+      <span class="link" onclick="showPage('b','contact')">Contact</span>
+    </div>
+  </div>
+  <div class="block">
+    <div class="label-row"><div class="label">All artists, 9</div></div>
+    <div class="cards-2col">
+      <div class="card wide-card clickable" onclick="showPage('b','artist')">
+        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>photo</span></div></div>
+        <div class="wide-card-body"><div class="title">Susan Hey</div><span class="tag">textiles</span></div>
+      </div>
+      <div class="card wide-card clickable" onclick="showPage('b','artist')">
+        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>photo</span></div></div>
+        <div class="wide-card-body"><div class="title">Pinal Maniar</div><span class="tag">natural dye</span></div>
+      </div>
+      <div class="card wide-card clickable" onclick="showPage('b','artist')">
+        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>photo</span></div></div>
+        <div class="wide-card-body"><div class="title">Fiona Bowring</div><span class="tag">photography</span></div>
+      </div>
+      <div class="card wide-card clickable" onclick="showPage('b','artist')">
+        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>photo</span></div></div>
+        <div class="wide-card-body"><div class="title">Valerie Kirk</div><span class="tag">tapestry</span></div>
+      </div>
+      <div class="card wide-card clickable" onclick="showPage('b','artist')">
+        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>photo</span></div></div>
+        <div class="wide-card-body"><div class="title">Nancy Tingey</div><span class="tag">textiles</span></div>
+      </div>
+      <div class="card wide-card clickable" onclick="showPage('b','artist')">
+        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>photo</span></div></div>
+        <div class="wide-card-body"><div class="title">Rozalie Sherwood</div><span class="tag">sculpture</span></div>
+      </div>
+      <div class="card wide-card clickable" onclick="showPage('b','artist')">
+        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>photo</span></div></div>
+        <div class="wide-card-body"><div class="title">Josie Cosgrove</div><span class="tag">photography</span></div>
+      </div>
+      <div class="card wide-card clickable" onclick="showPage('b','artist')">
+        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>photo</span></div></div>
+        <div class="wide-card-body"><div class="title">Karyn Fearnside</div><span class="tag">textiles</span></div>
+      </div>
+      <div class="card wide-card clickable" onclick="showPage('b','artist')">
+        <div class="wide-card-photo"><div class="img-placeholder img-lg"><span>photo</span></div></div>
+        <div class="wide-card-body"><div class="title">Bev Moxon</div><span class="tag">textiles</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">Contact details, social links, acknowledgement of country</div>
+</div>
+
 <!-- ===================== CONCEPT B: CONTACT ===================== -->
 <div class="site" id="b-contact">
   <div class="nav">
@@ -751,6 +428,7 @@
     <div class="links">
       <span class="link" onclick="showPage('b','explore')">Home</span>
       <span class="link" onclick="showPage('b','about')">About</span>
+      <span class="link" onclick="showPage('b','members')">Artists</span>
       <span class="link" onclick="showPage('b','exhibitions')">Exhibitions</span>
       <span class="link current" onclick="showPage('b','contact')">Contact</span>
     </div>
@@ -774,23 +452,10 @@
 </div>
 
 <script>
-function showConcept(which) {
-  document.getElementById('btn-concept-a').setAttribute('aria-pressed', which === 'a');
-  document.getElementById('btn-concept-b').setAttribute('aria-pressed', which === 'b');
-  if (which === 'a') { showPage('a', 'home'); } else { showPage('b', 'explore'); }
-}
-
 function showPage(concept, page) {
-  var pages = {
-    a: ['home', 'profile', 'exhibitions', 'about', 'contact', 'artists'],
-    b: ['explore', 'exhibitions', 'artist', 'about', 'contact']
-  };
-  var other = concept === 'a' ? 'b' : 'a';
-  pages[other].forEach(function(p) {
-    document.getElementById(other + '-' + p).classList.remove('active');
-  });
-  pages[concept].forEach(function(p) {
-    document.getElementById(concept + '-' + p).classList.toggle('active', p === page);
+  var pages = ['explore', 'exhibitions', 'artist', 'about', 'members', 'contact'];
+  pages.forEach(function(p) {
+    document.getElementById('b-' + p).classList.toggle('active', p === page);
   });
 }
 </script>
